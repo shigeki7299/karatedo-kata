@@ -1,4 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">空手形</string>
+    <string name="app_name">空手道 形</string>
+    <string name="pane_youtube">YouTube</string>
+    <string name="pane_camera">カメラ動画</string>
+    <string name="youtube_hint">YouTubeのURL</string>
+    <string name="youtube_load">読み込む</string>
+    <string name="youtube_save">保存</string>
+    <string name="youtube_save_cancel">中止</string>
+    <string name="youtube_saving">保存しています</string>
+    <string name="youtube_saving_progress">保存しています（%1$d%%）</string>
+    <string name="youtube_saved">動画フォルダに保存しました</string>
+    <string name="youtube_save_failed">動画を保存できませんでした</string>
+    <string name="youtube_save_unavailable">この動画はファイルとして保存できません</string>
+    <string name="youtube_empty">見本にする動画のURLを読み込んでください</string>
+    <string name="youtube_pick_saved">ダブルタップで保存映像を選択</string>
+    <string name="youtube_invalid">YouTubeのURLを確認してください</string>
+    <string name="youtube_unavailable">この動画は埋め込み再生できません</string>
+    <string name="youtube_error">YouTubeを再生できません（%1$d）</string>
+    <string name="local_empty">ダブルタップで撮影動画を選択</string>
+    <string name="local_change">ダブルタップで映像を変更</string>
+    <string name="local_same_video">左画面と同じ映像は読み込めません</string>
+    <string name="local_play_failed">映像を再生できませんでした</string>
+    <string name="mode_capture">撮影</string>
+    <string name="mode_playback">再生</string>
+    <string name="record_start">録画</string>
+    <string name="record_stop">録画停止</string>
+    <string name="record_saving">保存しています</string>
+    <string name="record_saved">動画フォルダに保存しました</string>
+    <string name="record_failed">録画を保存できませんでした</string>
+    <string name="camera_unavailable">カメラを起動できませんでした</string>
+    <string name="camera_permission">撮影にはカメラの許可が必要です</string>
+    <string name="camera_permission_button">許可する</string>
+    <string name="switch_camera">カメラ切替</string>
+    <string name="pose_visible">骨格</string>
+    <string name="pose_on">骨格ON</string>
+    <string name="pose_off">骨格OFF</string>
+    <string name="slider_link">連動</string>
+    <string name="slider_linked">連動中</string>
+    <string name="bookmark">しおり</string>
+    <string name="bookmark_previous">前のしおり</string>
+    <string name="bookmark_next">次のしおり</string>
+    <string name="play">再生</string>
+    <string name="pause">一時停止</string>
 </resources>

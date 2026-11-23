@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            overflow: hidden;
+        }
+        #player {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div id="player"></div>
+<script>
+    var player = null;
+    var pendingId = null;
+    var pendingAutoplay = false;
+    var playbackRate = 1;
+    var origin = "https://appassets.androidplatform.net";
+
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player("player", {
+            host: "https://www.youtube-nocookie.com",
+            width: "100%",
+            height: "100%",
+            playerVars: {
+                controls: 0,
+                rel: 0,
+                modestbranding: 1,
+                playsinline: 1,
+                fs: 0,
+                origin: origin
+            },
+            events: {
+                onReady: function () {
+                    if (player.setSize) {
+                        player.setSize(window.innerWidth, window.innerHeight);
+                    }
+                    Android.onReady();
+                    begin();
+                },
+                onStateChange: function (event) {
+                    if (event.data === 1 && player && player.setPlaybackRate) {
+                        player.setPlaybackRate(playbackRate);
+                    }
+                    Android.onState(event.data);
+                },
+                onError: function (event) {
+                    Android.onError(event.data);
+                }
+            }
+        });
+    }
+
+    window.addEventListener("resize", function () {
+        if (player && player.setSize) {
+            player.setSize(window.innerWidth, window.innerHeight);
+        }
+    });
+
+    function begin() {
+        if (!player || !pendingId || !player.cueVideoById) {
+            return;
+        }
+        if (pendingAutoplay && player.loadVideoById) {
+            player.loadVideoById(pendingId);
+        } else {
+            player.cueVideoById(pendingId);
+        }
+        if (player.setPlaybackRate) {
+            player.setPlaybackRate(playbackRate);
+        }
+        pendingId = null;
+        pendingAutoplay = false;
+    }
+
+    function cue(id, autoplay) {
+        pendingId = id;
+        pendingAutoplay = !!autoplay;
+        begin();
+    }
+
+    function play() {
+        if (player && player.playVideo) {
+            player.playVideo();
+        }
+    }
+
+    function pause() {
+        if (player && player.pauseVideo) {
+            player.pauseVideo();
+        }
+    }
+
+    function setRate(rate) {
+        playbackRate = rate;
+        if (player && player.setPlaybackRate) {
+            player.setPlaybackRate(rate);
+        }
+    }
+
+    function seekTo(seconds) {
+        if (player && player.seekTo) {
+            player.seekTo(seconds, true);
+        }
+    }
+
+    setInterval(function () {
+        if (!player || !player.getCurrentTime) {
+            return;
+        }
+        try {
+            var duration = player.getDuration();
+            if (!isFinite(duration) || duration < 0) {
+                duration = 0;
+            }
+            Android.onTime(player.getCurrentTime(), duration);
+        } catch (ignored) {
+        }
+    }, 250);
+</script>
+<script src="https://www.youtube.com/iframe_api"></script>
+</body>
+</html>
